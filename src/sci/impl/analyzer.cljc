@@ -13,7 +13,7 @@
    [sci.impl.macros :as macros]
    [sci.impl.records :as records]
    [sci.impl.resolve :as resolve]
-   #?(:clj [sci.impl.types :as types :refer [->Node ->constant]])
+   #?(:clj [sci.impl.types :as types :refer [->constant]])
    #?(:cljs [sci.impl.types :as types :refer [->constant]])
    [sci.impl.utils :as utils :refer
     [ana-macros constant? kw-identical? macro?
@@ -30,7 +30,7 @@
                                  gen-return-binding-call
                                  gen-return-needs-ctx-call
                                  gen-return-call]]
-      [sci.impl.types :refer [->Node]])))
+      [sci.impl.types])))
 
 (defn recur-target [ctx]
   (:recur-target ctx))

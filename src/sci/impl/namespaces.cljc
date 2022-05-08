@@ -835,8 +835,18 @@
 (def core-var
   (ns-new-var clojure-core-ns))
 
+;; node-id 101
+;; *last-parent-id* 101
+;; children: `(->Node ... ... *last-parent-id*)` ;; 101 = parent-id, stack-trace can look up parent-id in global registry in ctx
+;; (set-node-id node 101)
+
+(defn stack-trace [ctx]
+  (sci.impl.types/eval (sci.impl.types/->Node (+ 1 2 3) nil) ctx nil))
+
 (def clojure-core
   {:obj clojure-core-ns
+   'stack-trace (vars/new-var 'stack-trace stack-trace {:ns clojure-core-ns
+                                                        :sci.impl/op needs-ctx})
    '*ns* vars/current-ns
    ;; io
    '*in* io/in
