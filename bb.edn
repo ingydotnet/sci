@@ -5,7 +5,10 @@
          :git/sha "32e726cd6d785d00e49d4e614a05f7436d3831c0"}}
 
  :tasks
- {test:jvm  {:doc "Run CLJ tests with leiningen"
+ {
+  :init (alter-var-root (var babashka.process/*defaults*) assoc :pre-start-fn (fn [m] (apply println ">>>>>>>>" (:cmd m))))
+
+  test:jvm  {:doc "Run CLJ tests with leiningen"
              :task (shell "script/test/jvm")}
 
   test:native  {:doc "Run CLJ tests with leiningen"
